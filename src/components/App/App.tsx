@@ -3,6 +3,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { useState } from "react";
 import type { Movie } from "../../types/movie";
 import { fetchMovies } from "../../services/movieService";
+import MovieGrid from "../MovieGrid/MovieGrid";
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -21,6 +22,10 @@ export default function App() {
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <SearchBar onSubmit={handleSearchSubmit} />
+      <MovieGrid
+        onSelect={(movie) => console.log("Selected movie:", movie)}
+        movies={movies}
+      />
     </>
   );
 }
