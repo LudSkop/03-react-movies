@@ -4,12 +4,16 @@ import { useState } from "react";
 import type { Movie } from "../../types/movie";
 import { fetchMovies } from "../../services/movieService";
 import MovieGrid from "../MovieGrid/MovieGrid";
+import Loader from "../Loader/Loader";
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const handleSearchSubmit = async (query: string) => {
+    setLoading(true); // показуємо лоадер
     const data = await fetchMovies(query);
+    setLoading(false); // ховаємо лоадер після отримання даних
     if (data.results.length === 0) {
       toast.error("No movies found for your search query");
       return;
@@ -26,6 +30,7 @@ export default function App() {
         onSelect={(movie) => console.log("Selected movie:", movie)}
         movies={movies}
       />
+      {loading && <Loader />} {/* показуємо лоадер, якщо loading true */}
     </>
   );
 }
