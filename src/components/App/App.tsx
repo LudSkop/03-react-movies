@@ -34,10 +34,8 @@ export default function App() {
       setLoading(false);
       setError(true);
     }
-
-    console.log("Search query in App:", query);
   };
-  console.log("selectedMovie:", selectedMovie); // ← додай цей рядок
+
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
